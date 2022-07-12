@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
 
+
         <form action="{{route ('admin.pizzas.store')}}" method="POST">
             @csrf
 
@@ -31,6 +32,7 @@
                     @if (in_array($ingredient->id , old('ingredients', [])))
                         checked
                     @endif>
+
 
                     <label for="ingredient{{ $loop->iteration }}" class="form-label"><h5>{{ $ingredient->name }}</h5></label>
                 </div>

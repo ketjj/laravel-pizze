@@ -53,7 +53,7 @@ class PizzaController extends Controller
             $data['isVegetarian'] = 1;
         }else{
             $data['isVegetarian'] = 0;
-        };
+        }
 
         $data['slug'] = Pizza::generate_Slug($data['name']);
         $pizza = new Pizza();
@@ -63,10 +63,10 @@ class PizzaController extends Controller
         $pizza->save();
 
         if (array_key_exists('ingredients', $data)) {
-            $pizza->ingredients()->attach($data['ingredients']['id']);
-        };
+            $pizza->ingredients()->attach($data['ingredients']);
+        }
 
-        return redirect()->route('admin.pizzas.show', $pizza);
+        return redirect()->route('admin.pizzas.show', compact('pizza'));
     }
 
 
