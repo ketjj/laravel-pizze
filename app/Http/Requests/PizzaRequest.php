@@ -25,9 +25,9 @@ class PizzaRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:255',
-            'description' => 'required|min:10',
             'price' => 'required|numeric|min:1|max:99',
-            'popularity' => 'nullable|numeric|min:1|max:2'
+            'popularity' => 'nullable|numeric|min:1|max:2',
+            'ingredients' => 'required'
         ];
     }
 
@@ -36,21 +36,20 @@ class PizzaRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Il campo è obbligatorio',
-            'name.min' => 'Il campo deve contenere come minimo :min caratteri',
-            'name.max' => 'Il campo deve contenere al massimo :max caratteri',
+            'name.required' => 'Il nome è obbligatorio',
+            'name.min' => 'Il nome deve contenere come minimo :min caratteri',
+            'name.max' => 'Il nome deve contenere al massimo :max caratteri',
 
-            'description.required' => 'Il campo è obbligatorio',
-            'description.min' => 'Il campo deve contenere come minimo :min caratteri',
+            'price.required' => 'Il prezzo è obbligatorio',
+            'price.numeric' => 'il prezzo deve essere un numero',
+            'price.min' => 'Il prezzo deve contenere come minimo :min numeri',
+            'price.max' => 'Il prezzo deve contenere al massimo :max numeri',
 
-            'price.required' => 'Il campo è obbligatorio',
-            'price.numeric' => 'il dato deve essere un numero',
-            'price.min' => 'Il dato deve contenere come minimo :min numeri',
-            'price.max' => 'Il dato deve contenere al massimo :max numeri',
+            'popularity.numeric' => 'Il voto deve essere un numero',
+            'popularity.min' => 'Il voto deve contenere come minimo :min numeri',
+            'popularity.max' => 'Il voto deve contenere al massimo :max numeri',
 
-            'popularity.numeric' => 'l dato deve essere un numero',
-            'popularity.min' => 'Il campo deve contenere come minimo :min numeri',
-            'popularity.max' => 'Il campo deve contenere al massimo :max numeri'
+            'ingredients.required' => 'È obbligatorio inserire almeno un ingrediente'
 
         ];
     }

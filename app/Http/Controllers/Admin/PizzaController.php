@@ -44,16 +44,9 @@ class PizzaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PizzaRequest $request)
     {
         $data = $request->all();
-
-
-        if ($data['isVegetarian'] == "sì"){
-            $data['isVegetarian'] = 1;
-        }else{
-            $data['isVegetarian'] = 0;
-        }
 
         $data['slug'] = Pizza::generate_Slug($data['name']);
         $pizza = new Pizza();
@@ -95,10 +88,11 @@ class PizzaController extends Controller
     public function edit($id)
     {
         $pizza = Pizza::find($id);
+        $ingredients = Ingredient::all();
 
         if($pizza){
 
-            return view('admin.pizze.edit', compact ('pizza'));
+            return view('admin.pizze.edit', compact ('pizza', 'ingredients'));
         }
         abort(404);
 
@@ -118,13 +112,10 @@ class PizzaController extends Controller
         $data = $request->all();
         $data['slug'] = Pizza::generate_Slug($data['name']);
 
-        if ($data['isVegetarian'] == "sì"){
-            $data['isVegetarian'] = 1;
-        }else{
-            $data['isVegetarian'] = 0;
-        };
-
         $pizza->update($data);
+
+        $pizza->ingredients()->sync($data['ingredients']);
+
         return redirect()->route('admin.pizzas.show', compact ('pizza'));
 
     }

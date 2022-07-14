@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="container">
+        @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li class="text-danger">{{ $error }}</li>
+            @endforeach
+        </ul>
+        @endif
 
 
         <form action="{{route ('admin.pizzas.store')}}" method="POST">
@@ -37,9 +44,13 @@
                     <label for="ingredient{{ $loop->iteration }}" class="form-label"><h5>{{ $ingredient->name }}</h5></label>
                 </div>
 
+
               @endforeach
 
             </div>
+            @error('ingredients')
+                    <p class="text-danger"><strong>{{$message}}</strong></p>
+            @enderror
 
             <div class="mb-4">
               <label for="price" class="form-label"><h5>Prezzo</h5></label>
@@ -72,14 +83,14 @@
                 <div>Vegetariana</div>
 
                 <div class="form-check mb-4 mx-4">
-                    <input value="sì" class="form-check-input" type="radio" name="isVegetarian" id="isVegetarian1">
+                    <input value="1" class="form-check-input" type="radio" name="isVegetarian" id="isVegetarian1">
                     <label class="form-check-label" for="isVegetarian">
                     Sì
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input value="no" class="form-check-input" type="radio" name="isVegetarian" id="isVegetarian2" checked>
+                    <input value="0" class="form-check-input" type="radio" name="isVegetarian" id="isVegetarian2" checked>
                     <label class="form-check-label" for="isVegetarian">
                     No
                     </label>
