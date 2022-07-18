@@ -1,6 +1,13 @@
 <template>
 <div>
   <HeaderComp />
+    <main class="container">
+      <router-view></router-view>
+      <!-- <div 
+      v-for="pizza in pizzas"
+      :key="pizza.id"
+      >{{pizza.name}}</div> -->
+    </main>
   <FooterComp />
 </div>
   
@@ -41,6 +48,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped >
+ main{
+  min-height:calc(100vh - 140px);
+  padding: 50px 0;
+ }
 
 </style>
